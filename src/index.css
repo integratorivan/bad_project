@@ -13,3 +13,13 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
+
+button {
+  border: none;
+  padding: 10px;
+  margin-left: 10px;
+  background: black;
+  color: #F5F5F5;
+  font-weight: bold;
+  border-radius: 10px;
+}

@@ -1,6 +1,14 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 
+const FemaleOrNot = (props: { isFemale: boolean}) => {
+  if (props.isFemale === true) {
+    return <span style={{color: "black"}}>Вы выбрали Female!</span>;
+  } else {
+    return <span style={{color: "black"}}>Вы выбрали Male!</span>;
+  }
+}
+
 function Header() {
   return (
     <footer>
@@ -42,10 +50,17 @@ type Response = {
 function App() {
   const [data, setData] = useState<Response>();
   const [loading, setLoading] = useState(true);
+  const [selectedCharacter, setSelectedCharacter] = useState<unknown>();
+  const [isFemale, setIsFemale] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
-    fetch("https://rickandmortyapi.com/api/character")
+      if (selectedCharacter?.gender === 'Female') {
+        setIsFemale(true);
+      } else{
+        setIsFemale(false);
+      }
+
+      fetch("https://rickandmortyapi.com/api/character")
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -58,36 +73,74 @@ function App() {
       .catch((err) => {
         console.log(err);
       }).finally(() => {
-        setTimeout(() => {
           setLoading(false);
-        }, 1000)
       });
-  }, []);
-
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-
-  console.log('test')
+  }, [selectedCharacter]);
 
   return (
-    <>
+    <div>
       <Header />
+      <FemaleOrNot isFemale={isFemale} />
       {
-        loading ? <strong>Loading...</strong> : (
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        selectedCharacter?.name ? (
+          <div className="selected">
+            <h3>Выбранный персонаж: </h3>
+            <div>
+              <div>
+                <span className="title">Name: </span>
+                <span className="list_content">{selectedCharacter.name}</span>
+              </div>
+              <div>
+                <span className="title">Status: </span>
+                <span className="list_content">{selectedCharacter.status}</span>
+              </div>
+              <div>
+                <span className="title">Species: </span>
+                <span className="list_content">{selectedCharacter.species}</span>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="selected">
+            <h3>Вы пока никого не выбрали, нажмите по персонажу: </h3>
+            <div>
+                <span className="title">Name: </span>
+              </div>
+              <div>
+                <span className="title">Status: </span>
+              </div>
+              <div>
+                <span className="title">Species: </span>
+              </div>
+          </div>
+        )
+      }
+      {
+        loading ? <strong style={{fontSize: '50px', color: "black"}}>Loading...</strong> : (
             <div className="wrapper">
               {
                 data?.results.map((item) => {
                   return (
-                      <div className="card" >
+                      <div onClick={() => setSelectedCharacter(item)} className="card" >
                         <div className="image_container">
                           <img className="image" src={item.image}  alt="" />
                           <strong>{item.name}</strong>
                         </div>
                         <div className="list">
-                          <p>Gender: {item.gender}</p>
-                          <p>Status: {item.status}</p>
-                          <p>Species: {item.species}</p>
+                          <div>
+                            <span className="title">Gender: </span>
+                            <span className="list_content">{item.gender}</span>
+                          </div>
+                          <div>
+                            <span className="title">Status: </span>
+                            <span className="list_content">{item.status}</span>
+                          </div>
+                          <div>
+                            <span className="title">Species: </span>
+                            <span className="list_content">{item.species}</span>
+                          </div>
                         </div>
                       </div>
                   )
@@ -96,7 +149,7 @@ function App() {
             </div>
         )
       }
-    </>
+    </div>
   );
 }
 

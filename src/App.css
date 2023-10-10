@@ -1,13 +1,10 @@
 #root {
-  /*max-width: 1280px;*/
   margin: 0 auto;
   text-align: center;
 }
 
 h1 {
-  background: linear-gradient(to right, #ff00ff, #ffff00);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: black;
 }
 
 .card {
@@ -15,6 +12,7 @@ h1 {
   background-color: #3C3E43;
   border-radius: 10px;
   padding: 20px;
+  transition: 0.3s;
 }
 
 .wrapper {
@@ -34,4 +32,27 @@ h1 {
 }
 
 .list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  font-size: 20px;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.card:hover {
+  border-radius: 50px;
+  transition: 0.3s;
+}
+
+.selected {
+  color: #3C3E43;
+}
+
+.wrapper2 {
+  display: flex;
+  align-items: flex-start;
 }
