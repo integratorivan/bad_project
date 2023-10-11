@@ -1,13 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-
-const FemaleOrNot = (props: { isFemale: boolean}) => {
-  if (props.isFemale === true) {
-    return <span style={{color: "black"}}>Вы выбрали Female!</span>;
-  } else {
-    return <span style={{color: "black"}}>Вы выбрали Male!</span>;
-  }
-}
+import { FemaleOrNot } from "./pages/FemaleOrNot";
 
 function Header() {
   return (
