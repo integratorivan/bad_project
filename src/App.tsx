@@ -14,13 +14,12 @@ type Response = {
   info: {
     count: number;
     pages: number;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     prev: any;
     next: string;
   },
   results: {
     created: string;
-    episode: [string];
+    episode: Array<string>;
     gender: string;
     id: number;
     image: string;
@@ -75,15 +74,13 @@ function App() {
       <Header />
       <FemaleOrNot isFemale={isFemale} />
       {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
         selectedCharacter?.name ? (
           <div className="selected">
             <h3>Выбранный персонаж: </h3>
             <div>
               <div>
-                <span className="title">Name: </span>
-                <span className="list_content">{selectedCharacter.name}</span>
+                <span className="title">Gender: </span>
+                <span className="list_content">{selectedCharacter.gender}</span>
               </div>
               <div>
                 <span className="title">Status: </span>
