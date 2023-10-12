@@ -42,7 +42,7 @@ type Response = {
 function App() {
   const [data, setData] = useState<Response>();
   const [loading, setLoading] = useState(true);
-  const [selectedCharacter, setSelectedCharacter] = useState<unknown>();
+  const [selectedCharacter, setSelectedCharacter] = useState<any>();
   const [isFemale, setIsFemale] = useState(false);
 
   useEffect(() => {
