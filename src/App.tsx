@@ -10,37 +10,8 @@ function Header() {
   );
 }
 
-type Response = {
-  info: {
-    count: number;
-    pages: number;
-    prev: any;
-    next: string;
-  },
-  results: {
-    created: string;
-    episode: Array<string>;
-    gender: string;
-    id: number;
-    image: string;
-    location: {
-      name: string;
-      url: string;
-    },
-    name: string;
-    origin: {
-      name: string;
-      url: string;
-    },
-    species: string;
-    status: string;
-    type: string;
-    url: string;
-  }[]
-}
-
 function App() {
-  const [data, setData] = useState<Response>();
+  const [data, setData] = useState<any>();
   const [loading, setLoading] = useState(true);
   const [selectedCharacter, setSelectedCharacter] = useState<any>();
   const [isFemale, setIsFemale] = useState(false);
@@ -111,7 +82,7 @@ function App() {
         loading ? <strong style={{fontSize: '50px', color: "black"}}>Loading...</strong> : (
             <div className="wrapper">
               {
-                data?.results.map((item) => {
+                data?.results.map((item: any) => {
                   return (
                       <div onClick={() => setSelectedCharacter(item)} className="card" >
                         <div className="image_container">
