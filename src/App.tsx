@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import { FemaleOrNot } from "./pages/FemaleOrNot";
+import { Wrapper } from "./shared/components/Wrapper";
+import { url } from "./api/api";
 
 function Header() {
   return (
@@ -23,7 +25,7 @@ function App() {
         setIsFemale(false);
       }
 
-      fetch("https://rickandmortyapi.com/api/character")
+      fetch(`${url}character`)
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -32,16 +34,13 @@ function App() {
       })
       .then((data: Response) => {
         setData(data);
-      })
-      .catch((err) => {
-        console.log(err);
       }).finally(() => {
           setLoading(false);
       });
   }, [selectedCharacter]);
 
   return (
-    <div>
+    <Wrapper>
       <Header />
       <FemaleOrNot isFemale={isFemale} />
       {
@@ -110,7 +109,7 @@ function App() {
             </div>
         )
       }
-    </div>
+    </Wrapper>
   );
 }
 
