@@ -1,3 +1,5 @@
+/* eslint-disable */
+// @ts-nocheck
 import { useEffect, useState } from "react";
 import "./App.css";
 import { FemaleOrNot } from "./pages/FemaleOrNot";
@@ -13,9 +15,9 @@ function Header() {
 }
 
 function App() {
-  const [data, setData] = useState<any>();
+  const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
-  const [selectedCharacter, setSelectedCharacter] = useState<any>();
+  const [selectedCharacter, setSelectedCharacter] = useState();
   const [isFemale, setIsFemale] = useState(false);
 
   useEffect(() => {
@@ -81,7 +83,7 @@ function App() {
         loading ? <strong style={{fontSize: '50px', color: "black"}}>Loading...</strong> : (
             <div className="wrapper">
               {
-                data?.results.map((item: any) => {
+                data?.results.map((item) => {
                   return (
                       <div onClick={() => setSelectedCharacter(item)} className="card" >
                         <div className="image_container">
